@@ -1,0 +1,11 @@
+---
+import { getSiteCopy } from "../lib/site";
+
+const { locale = "pt" } = Astro.props;
+const copy = getSiteCopy(locale);
+---
+
+<footer class="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-slate-400 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+  <p>© 2026 <span class="font-semibold text-slate-100">Guerreiro.IA</span>. {copy.footer.summary}</p>
+  <p class="text-slate-500">{copy.footer.note}</p>
+</footer>

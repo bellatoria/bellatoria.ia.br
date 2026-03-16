@@ -1,0 +1,35 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getSiteCopy } from "../lib/site";
+
+const { locale = "pt" } = Astro.props;
+const copy = getSiteCopy(locale);
+const otherLocale = locale === "en" ? "pt" : "en";
+---
+
+<header class="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-6 sm:px-8 lg:px-10">
+  <div class="flex items-center justify-between gap-4">
+  <a href={getRelativeLocaleUrl(locale, "")} class="flex items-center gap-3 text-sm uppercase tracking-[0.28em] text-slate-200 transition hover:text-white">
+    <img src="/logo.png" alt="Logo Guerreiro IA" class="h-12 w-12 rounded-full border border-white/10 bg-white/5 object-cover p-1 shadow-[0_0_30px_rgba(121,183,255,0.18)]" />
+    <span>
+      Guerreiro <span class="text-accent">IA</span>
+    </span>
+  </a>
+
+    <a
+      href={getRelativeLocaleUrl(otherLocale, "")}
+      class="rounded-full border border-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-slate-300 transition hover:border-[rgba(121,183,255,0.34)] hover:text-white"
+    >
+      {copy.switchLabel}
+    </a>
+  </div>
+
+  <nav class="surface flex flex-wrap items-center gap-2 rounded-[1.5rem] px-3 py-3 text-sm text-slate-200">
+    {copy.nav.map((item) => (
+      <a href={getRelativeLocaleUrl(locale, item.href)} class="rounded-full px-4 py-2 transition hover:bg-white/5 hover:text-white">
+        {item.label}
+      </a>
+    ))}
+    <a href="mailto:contato@guerreiro.ia.br" class="rounded-full px-4 py-2 text-accent transition hover:bg-white/5 hover:text-white">{copy.ctaContact}</a>
+  </nav>
+</header>

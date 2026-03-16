@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { getSiteCopy } from "../lib/site";
+
+const locale = "pt";
+const copy = getSiteCopy(locale);
+---
+
+<Layout title="Projetos | Guerreiro.IA" description="Projetos em destaque de Victor Guerreiro em sistemas de recomendação, serviços públicos e modelagem aplicada." locale={locale}>
+  <section class="animate-fadeIn">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-xs uppercase tracking-[0.24em] text-accent">{copy.projects.eyebrow}</p>
+      <h1 class="mt-4 text-4xl font-semibold text-slate-50 sm:text-5xl">{copy.projects.title}</h1>
+      <p class="mt-5 text-base leading-8 text-slate-300">{copy.projects.intro}</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {copy.projects.cards.map((card) => (
+        <Card {...card} ctaLabel="Ver projeto" />
+      ))}
+    </div>
+  </section>
+</Layout>

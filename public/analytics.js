@@ -1,4 +1,6 @@
 (function () {
+  var DEBUG_KEY = "bellatoria_debug";
+
   function pageMeta() {
     var b = document.body;
     return {
@@ -14,25 +16,24 @@
     }
   }
 
+  function debugEnabled() {
+    try {
+      return window.localStorage && window.localStorage.getItem(DEBUG_KEY) === "1";
+    } catch (_) {
+      return false;
+    }
+  }
+
   function track(name, props) {
     var evt = { event: name, payload: props };
-
-    if (name === "affiliate_click") {
-      var slug = props.source_slug || pageMeta().page_slug;
-      gc("/event/affiliate_click/" + slug, "affiliate_click: " + (props.cta_name || slug));
-    } else {
-      gc("/event/" + name, name);
-    }
-
-    if (window.localStorage && window.localStorage.getItem("bellatoria_debug") === "1") {
+    var slug = props.source_slug || pageMeta().page_slug;
+    var label = props.cta_name || props.target_slug || slug;
+    gc("/event/" + name + "/" + slug, name + ": " + label);
+    if (debugEnabled()) {
       console.log("[bellatoria:track]", evt);
     }
     window.dispatchEvent(new CustomEvent("bellatoria:track", { detail: evt }));
   }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    track("page_view", pageMeta());
-  });
 
   document.addEventListener("click", function (event) {
     var el = event.target.closest("[data-track]");

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bellatoria.ia.br/sitemap.xml
+Sitemap: https://bellator.ia.br/sitemap.xml

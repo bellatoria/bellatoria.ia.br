@@ -1,11 +1,11 @@
-# bellatoria.ia.br
+# bellator.ia.br
 
-Public production repository for the Bellatoria editorial platform.
+Public production repository for the Bellator.IA site inside the Bellatoria workspace.
 
 ## Role
 
 - public production target
-- custom domain: `bellatoria.ia.br`
+- custom domain: `bellator.ia.br`
 - promoted from private staging work after review
 
 ## Deployment
